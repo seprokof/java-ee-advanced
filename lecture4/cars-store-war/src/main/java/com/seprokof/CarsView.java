@@ -2,6 +2,7 @@ package com.seprokof;
 
 import java.util.Set;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,6 +16,7 @@ import com.seprokof.dto.Truck;
  *
  */
 @Named
+@RequestScoped
 public class CarsView {
 
 	@Inject

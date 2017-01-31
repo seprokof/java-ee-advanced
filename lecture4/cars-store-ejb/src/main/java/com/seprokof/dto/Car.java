@@ -2,6 +2,7 @@ package com.seprokof.dto;
 
 import java.io.Serializable;
 
+import javax.enterprise.inject.Vetoed;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +18,7 @@ import javax.persistence.NamedQuery;
  *
  */
 @Entity
+@Vetoed
 @NamedQuery(name = Car.GET_ALL_CARS, query = "SELECT c FROM Car c")
 public class Car implements Serializable {
 	private static final long serialVersionUID = 2846988032545366397L;

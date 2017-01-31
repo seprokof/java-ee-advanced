@@ -13,12 +13,13 @@
 		<module>cars-store-ejb</module>
 		<module>cars-store-war</module>
 		<module>cars-store-ear</module>
+		<module>storage-se</module>
 	</modules>
 
 	<properties>
 		<java.compiler.version>1.8</java.compiler.version>
 		<java.ee.version>7.0</java.ee.version>
-		<glassfish.embedded.version>4.1.1</glassfish.embedded.version>
+		<weld.version>2.4.0.Final</weld.version>
 	</properties>
 
 	<dependencyManagement>
@@ -49,6 +50,14 @@
 				<artifactId>cars-store-war</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.weld.se</groupId>
+				<artifactId>weld-se-core</artifactId>
+				<version>${weld.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
