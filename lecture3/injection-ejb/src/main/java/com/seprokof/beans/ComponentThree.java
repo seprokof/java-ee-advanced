@@ -23,7 +23,7 @@ public class ComponentThree {
     @EJB(beanName = "ComponentOne")
     private InterfaceTwo injectedOne;
 
-    @EJB(lookup = "java:module/ComponentTwo")
+    @EJB(lookup = "java:app/injection-ejb-1.0.0-SNAPSHOT/ComponentTwo!com.seprokof.beans.ComponentTwo")
     private ComponentTwo injectedTwo;
 
     @Resource
@@ -36,7 +36,7 @@ public class ComponentThree {
     @PostConstruct
     public void init() {
         injectedThree = (InterfaceOne) context.lookup(
-                "java:global/packaging-ear-1.0.0-SNAPSHOT/injection-ejb-1.0.0-SNAPSHOT/ComponentOne!com.seprokof.InterfaceOne");
+                "java:global/injection-ear-1.0.0-SNAPSHOT/injection-ejb-1.0.0-SNAPSHOT/ComponentOne!com.seprokof.InterfaceOne");
     }
 
     public String callOne() {

@@ -7,7 +7,7 @@ import com.seprokof.InterfaceThree;
 import com.seprokof.InterfaceTwo;
 
 @Stateless
-@LocalBean
+@LocalBean 
 public class ComponentTwo implements InterfaceTwo, InterfaceThree {
 
     @Override

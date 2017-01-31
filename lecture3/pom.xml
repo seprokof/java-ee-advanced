@@ -11,9 +11,9 @@
 
     <modules>
         <module>injection-ejb</module>
-        <module>output-war</module>
-        <module>packaging-ear</module>
-        <module>launcher</module>
+        <module>injection-war</module>
+        <module>injection-ear</module>
+        <module>injection-launcher</module>
     </modules>
 
     <properties>
@@ -47,7 +47,7 @@
 
             <dependency>
                 <groupId>com.seprokof</groupId>
-                <artifactId>output-war</artifactId>
+                <artifactId>injection-war</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
