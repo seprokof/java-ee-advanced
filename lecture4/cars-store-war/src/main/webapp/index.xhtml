@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Cars Store</title>
+	<h:outputStylesheet name="styles.css" library="css" />
+</h:head>
+
+<h:body>
+	<ui:debug hotkey="x"
+		rendered="#{facesContext.application.projectStage == 'Development'}" />
+
+	<h2>Passcars</h2>
+	<h:graphicImage library="images" name="passcar.jpg" width="500"/>
+	<br />
+	<h:dataTable value="#{carsView.passcars}" var="c" styleClass="table"
+		headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+		<h:column>
+			<f:facet name="header">Model</f:facet>
+    		#{c.model}
+    	</h:column>
+
+		<h:column>
+			<f:facet name="header">Year</f:facet>
+    		#{c.year}
+    	</h:column>
+
+		<h:column>
+			<f:facet name="header">Passengers</f:facet>
+    		#{c.passengerCount}
+    	</h:column>
+	</h:dataTable>
+	<br />
+
+	<h2>Trucks</h2>
+	<h:graphicImage library="images" name="truck.jpg" width="500"/>
+	<br />
+	<h:dataTable value="#{carsView.trucks}" var="c"	styleClass="table"
+		headerClass="tableHeader" rowClasses="tableOddRow,tableEvenRow">
+		<h:column>
+			<f:facet name="header">Model</f:facet>
+    		#{c.model}
+    	</h:column>
+
+		<h:column>
+			<f:facet name="header">Year</f:facet>
+    		#{c.year}
+    	</h:column>
+
+		<h:column>
+			<f:facet name="header">Capacity</f:facet>
+    		#{c.carryingCapacity} kilograms
+    	</h:column>
+	</h:dataTable>
+</h:body>
+</html>
