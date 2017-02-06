@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	template="/templates/root-stub.xhtml">
+
+	<ui:define name="pageHeader">
+		<p:toolbar>
+			<f:facet name="right">
+				<h:form>
+					<ul>
+						<li style="border-left: 0 none">
+							<p:outputLabel value="LOGGED AS" style="font-family: 'Lato',sans-serif; font-size:10px;font-weight:800;margin-bottom:0px;padding:10px 10px 0 0" />
+							<p:outputLabel value="#{loginView.login}" style="color:orange;font-family:'Lato',sans-serif; font-size:12px;font-weight:800;margin-bottom:0px;padding:9px 10px 0 0" />
+						</li>
+						<li>
+						    <p:commandLink value="LOGOUT" action="#{loginView.logout}" />
+						</li>
+					</ul>
+				</h:form>
+			</f:facet>
+		</p:toolbar>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/root-stub.xhtml">
+
+	<ui:define name="pageTitle">Login</ui:define>
+
+	<ui:define name="pageHeader">
+		<h2>Login</h2>
+	</ui:define>
+
+	<ui:define name="pageBody">
+		<h:form>
+			<p:panelGrid columns="3">
+				<p:outputLabel for="loginInputId" value="Username:"
+					indicateRequired="true" />
+				<p:inputText id="loginInputId" value="#{loginView.login}"
+					required="true"
+					requiredMessage="Please, specify username and try again" />
+				<p:message id="loginInputIdmsg" for="loginInputId" />
+
+				<p:outputLabel for="passInputId" value="Password:"
+					indicateRequired="true" />
+				<p:password id="passInputId" value="#{loginView.password}"
+					required="true"
+					requiredMessage="Please, specify password and try again" />
+				<p:message id="passInputIdmsg" for="passInputId" />
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Sign-in" action="#{loginView.authenticate}"
+				update="passInputIdmsg loginInputIdmsg" />
+			<p:commandButton value="Sign-Up"
+				action="registration?faces-redicrect=true" ajax="false"
+				immediate="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
