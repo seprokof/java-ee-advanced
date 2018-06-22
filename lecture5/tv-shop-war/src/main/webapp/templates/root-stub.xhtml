@@ -11,12 +11,14 @@
 </h:head>
 
 <h:body>
+	<h:outputStylesheet name="styles.css" library="css" />
+
 	<ui:debug hotkey="x"
 		rendered="#{facesContext.application.projectStage == 'Development'}" />
 
-	<h:form>
+	<h:form id="layoutFormId">
 		<p:messages showDetail="false" autoUpdate="true" closable="false"
-			globalOnly="true" />
+			globalOnly="true" id="msgGlobalId" />
 	</h:form>
 
 	<ui:insert name="pageHeader" />

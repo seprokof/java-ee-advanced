@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.seprokof.anotation.Loggable;
-import com.seprokof.dao.ShopClientsDao;
-import com.seprokof.dto.ShopClient;
+import com.seprokof.dao.UserDao;
+import com.seprokof.dto.User;
 
 /**
  * Registration process controller.
@@ -23,9 +23,9 @@ import com.seprokof.dto.ShopClient;
 public class RegistrationView {
 
     @Inject
-    private ShopClientsDao userDao;
+    private UserDao userDao;
 
-    private ShopClient user = new ShopClient();
+    private User user = new User();
 
     /**
      * Registers new user in the system.
@@ -34,7 +34,7 @@ public class RegistrationView {
      */
     public String register() {
         try {
-            userDao.addShopClient(user);
+            userDao.addUser(user);
         } catch (EJBException e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "User already exisit, choose another login", null));
@@ -43,11 +43,11 @@ public class RegistrationView {
         return "login?faces-redirect=true";
     }
 
-    public ShopClient getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(ShopClient user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

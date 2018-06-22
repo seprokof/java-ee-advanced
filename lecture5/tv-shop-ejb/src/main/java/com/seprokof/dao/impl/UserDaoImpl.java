@@ -4,29 +4,24 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.seprokof.dao.ShopClientsDao;
-import com.seprokof.dto.ShopClient;
+import com.seprokof.dao.UserDao;
+import com.seprokof.dto.User;
 
 @Stateless
-public class UserDaoImpl implements ShopClientsDao {
+public class UserDaoImpl implements UserDao {
 
     @Inject
     private EntityManager em;
 
     @Override
-    public ShopClient addShopClient(ShopClient user) {
+    public User addUser(User user) {
         em.persist(user);
         return user;
     }
 
     @Override
-    public ShopClient getShopClientById(Long id) {
-        return em.find(ShopClient.class, id);
-    }
-
-    @Override
-    public ShopClient getShopClientByLogin(String login) {
-        return em.createNamedQuery(ShopClient.GET_BY_LOGIN, ShopClient.class).setParameter(1, login).getSingleResult();
+    public User getUserByLogin(String login) {
+        return em.createNamedQuery(User.GET_BY_LOGIN, User.class).setParameter(1, login).getSingleResult();
     }
 
 }

@@ -6,7 +6,39 @@
 	template="/templates/logged-stub.xhtml">
 
 	<ui:define name="pageBody">
-	Hi! your orders list is here!
+		<h:form id="ordersFormId">
+			<p:dataTable id="ordersId" var="order" value="#{ordersView.orders}"
+				style="width: 80%" rowKey="#{order.id}"
+				selection="#{ordersView.selectedOrder}" selectionMode="single"
+				rowStyleClass="#{order.status == 'DONE' ? 'LightGreen' : (order.status == 'CANCELED' ? 'Tomato' : null)}">
+				<f:facet name="header">
+           			Your orders
+       			</f:facet>
+
+				<p:ajax event="rowSelect" update="ordersFormId:deleteBtnId" />
+
+				<p:column headerText="Order №">
+					<h:outputText value="#{order.id}" />
+				</p:column>
+
+				<p:column headerText="Total">
+					<h:outputText value="#{order.total}" />
+				</p:column>
+
+				<p:column headerText="Created">
+					<h:outputText value="#{order.creationTime}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{order.status}" />
+				</p:column>
+			</p:dataTable>
+			<br />
+			<p:commandButton value="Buy" action="wizard" style="width:90px" />
+			<p:commandButton id="deleteBtnId" value="Delete"
+				action="#{ordersView.delete}" update="ordersFormId:ordersId @this"
+				disabled="#{ordersView.selectedOrder == null}" />
+		</h:form>
 	</ui:define>
 
 </ui:composition>

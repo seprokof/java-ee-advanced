@@ -1,14 +1,16 @@
 package com.seprokof.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.inject.Vetoed;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToMany;
 
 /**
  * Shop user database representation.
@@ -16,10 +18,10 @@ import javax.validation.constraints.NotNull;
  * @author seprokof
  *
  */
-@Entity
+@Entity(name = "Client")
 @Vetoed
-@NamedQuery(name = ShopClient.GET_BY_LOGIN, query = "SELECT u FROM ShopClient u WHERE u.login=?1")
-public class ShopClient implements Serializable {
+@NamedQuery(name = User.GET_BY_LOGIN, query = "SELECT c FROM Client c WHERE c.login=?1")
+public class User implements Serializable {
     private static final long serialVersionUID = -3120591020417308506L;
     public static final String GET_BY_LOGIN = "getByLogin";
 
@@ -30,8 +32,10 @@ public class ShopClient implements Serializable {
     private String login;
     private String firstName;
     private String lastName;
-    @NotNull
+    @Column(nullable = false)
     private String password;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -73,59 +77,56 @@ public class ShopClient implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", login=" + login + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", password=" + password + "]";
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((login == null) ? 0 : login.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        ShopClient other = (ShopClient) obj;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
+        }
+        User other = (User) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
-        if (lastName == null) {
-            if (other.lastName != null)
-                return false;
-        } else if (!lastName.equals(other.lastName))
-            return false;
+        }
         if (login == null) {
-            if (other.login != null)
+            if (other.login != null) {
                 return false;
-        } else if (!login.equals(other.login))
+            }
+        } else if (!login.equals(other.login)) {
             return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
+        }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", login=" + login + ", firstName=" + firstName + ", lastName=" + lastName
+                + ", password=*****]";
     }
 
 }

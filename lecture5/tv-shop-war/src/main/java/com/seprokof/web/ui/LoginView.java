@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.seprokof.anotation.Loggable;
-import com.seprokof.dao.ShopClientsDao;
-import com.seprokof.dto.ShopClient;
+import com.seprokof.dao.UserDao;
+import com.seprokof.dto.User;
 
 /**
  * Controller for the login page. Remember me feature is used, the username will be stored in cookies, so that allows
@@ -27,10 +27,9 @@ public class LoginView implements Serializable {
     private static final long serialVersionUID = -3826282210130414626L;
 
     @Inject
-    private ShopClientsDao shopClientService;
+    private UserDao shopClientService;
 
-    private String login;
-    private String password;
+    private User loggedClient = new User();
     private boolean isAuthenticated;
 
     /**
@@ -41,9 +40,10 @@ public class LoginView implements Serializable {
     public String authenticate() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
-            ShopClient loaded = shopClientService.getShopClientByLogin(login);
-            if (loaded.getPassword().equals(password)) {
+            User loaded = shopClientService.getUserByLogin(loggedClient.getLogin());
+            if (loaded.getPassword().equals(loggedClient.getPassword())) {
                 isAuthenticated = true;
+                loggedClient = loaded;
                 return "orders?faces-redirect=true";
             } else {
                 ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password is incorrect", null));
@@ -69,20 +69,12 @@ public class LoginView implements Serializable {
         return isAuthenticated;
     }
 
-    public String getLogin() {
-        return login;
+    public User getLoggedClient() {
+        return loggedClient;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLoggedClient(User loggedClient) {
+        this.loggedClient = loggedClient;
     }
 
 }

@@ -6,21 +6,16 @@
 	template="/templates/root-stub.xhtml">
 
 	<ui:define name="pageHeader">
-		<p:toolbar>
-			<f:facet name="right">
-				<h:form>
-					<ul>
-						<li style="border-left: 0 none">
-							<p:outputLabel value="LOGGED AS" style="font-family: 'Lato',sans-serif; font-size:10px;font-weight:800;margin-bottom:0px;padding:10px 10px 0 0" />
-							<p:outputLabel value="#{loginView.login}" style="color:orange;font-family:'Lato',sans-serif; font-size:12px;font-weight:800;margin-bottom:0px;padding:9px 10px 0 0" />
-						</li>
-						<li>
-						    <p:commandLink value="LOGOUT" action="#{loginView.logout}" />
-						</li>
-					</ul>
-				</h:form>
-			</f:facet>
-		</p:toolbar>
+		<h:form>
+			<p:menubar>
+				<f:facet name="options">
+					<p:outputLabel value="#{loginView.loggedClient.login}"
+						style="margin-right:20px;font-size:17px;color:DeepSkyBlue;font-weight:700" />
+					<p:commandLink value="Logout" action="#{loginView.logout}"
+						style="margin-right:10px;font-size:12px;display:inline" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

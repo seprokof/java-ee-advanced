@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/logged-stub.xhtml">
+
+	<ui:define name="pageBody">
+		<h:form>
+			<p:wizard>
+				<p:tab id="pickPurchaseTabId" title="Pick">
+					<p:panel header="Pick your purchase">
+						<p:repeat value="#{purchaseView.availableProducts}" var="product">
+							<h:panelGrid columns="3" style="width:100%"	columnClasses="logo,detail">
+								<h:graphicImage library="images" name="#{product.imageName}" width="300"/>
+
+								<p:outputPanel>
+									<h:panelGrid columns="2" cellpadding="5">
+										<h:outputText value="Model:" />
+										<h:outputText value="#{product.model}" style="font-weight: bold" />
+
+										<h:outputText value="Price:" />
+										<h:outputText value="$ #{product.price}" style="font-weight: bold" />
+
+										<h:outputText value="Diagonal:" />
+										<h:outputText value="#{product.diagonal}" style="font-weight: bold" />
+										
+										<h:outputText value="Screen Resolution:" />
+										<h:outputText value="#{product.screenResolution}" style="font-weight: bold" />
+										
+										<h:outputText value="Screen Format:" />
+										<h:outputText value="#{product.screenFormat}" style="font-weight: bold" />
+									</h:panelGrid>
+								</p:outputPanel>
+
+								<p:commandButton value="Buy" actionListener="#{purchaseView.addToCart(product)}" style="width:90px" />
+							</h:panelGrid>
+							<hr />
+						</p:repeat>
+					</p:panel>
+				</p:tab>
+
+				<p:tab id="addressTabId" title="Address">
+					<p:panel header="Delivery Address">
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Phone: " />
+							<p:inputMask id="phone" value="#{purchaseView.address.phoneNumber}" mask="+7 (999) 999-9999" />
+
+							<h:outputText value="Street: " />
+							<p:inputText value="#{purchaseView.address.street}" />
+
+							<h:outputText value="Home: " />
+							<p:inputText value="#{purchaseView.address.homeNumber}" />
+
+							<h:outputText value="Appartment: " />
+							<p:inputText value="#{purchaseView.address.appartmentNumber}" />
+
+							<h:outputText value="Commentary: " />
+							<p:inputTextarea rows="6" cols="33" value="#{purchaseView.address.comment}" />
+						</h:panelGrid>
+					</p:panel>
+				</p:tab>
+				
+				<p:tab id="confirmationTabId" title="Confirmation">
+					<p:panel header="Order Confirmation">
+						<h3>Ordered:</h3>
+						<hr />
+						<h:panelGrid columns="1">
+							<p:repeat value="#{purchaseView.ordered.entrySet().toArray()}" var="orderLine">
+								<h:panelGrid columns="2" columnClasses="label, value">
+									<h:outputText value="#{orderLine.key.model}" />
+									<h:outputText value="#{orderLine.value}" />
+								</h:panelGrid>
+							</p:repeat>
+						</h:panelGrid>
+						<br />
+						<h3>Delivery Address:</h3>	
+						<hr />
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Phone: " />
+							<h:outputText value="#{purchaseView.address.phoneNumber}" />
+							
+
+							<h:outputText value="Street: " />
+							<h:outputText value="#{purchaseView.address.street}" />
+
+							<h:outputText value="Home: " />
+							<h:outputText value="#{purchaseView.address.homeNumber}" />
+
+							<h:outputText value="Appartment: " />
+							<h:outputText value="#{purchaseView.address.appartmentNumber}" />
+
+							<h:outputText value="Commentary: " rendered="#{purchaseView.address.comment != ''}" />
+							<h:outputText value="#{purchaseView.address.comment}" rendered="#{purchaseView.address.comment != ''}"/>
+						</h:panelGrid>
+						<br/>
+					</p:panel>
+					
+					<p:commandButton value="Order" action="#{purchaseView.save}" style="width:97px"/>
+				</p:tab>
+			</p:wizard>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

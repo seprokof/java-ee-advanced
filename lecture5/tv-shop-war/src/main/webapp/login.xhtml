@@ -16,14 +16,14 @@
 			<p:panelGrid columns="3">
 				<p:outputLabel for="loginInputId" value="Username:"
 					indicateRequired="true" />
-				<p:inputText id="loginInputId" value="#{loginView.login}"
+				<p:inputText id="loginInputId" value="#{loginView.loggedClient.login}"
 					required="true"
 					requiredMessage="Please, specify username and try again" />
 				<p:message id="loginInputIdmsg" for="loginInputId" />
 
 				<p:outputLabel for="passInputId" value="Password:"
 					indicateRequired="true" />
-				<p:password id="passInputId" value="#{loginView.password}"
+				<p:password id="passInputId" value="#{loginView.loggedClient.password}"
 					required="true"
 					requiredMessage="Please, specify password and try again" />
 				<p:message id="passInputIdmsg" for="passInputId" />
